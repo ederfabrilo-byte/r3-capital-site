@@ -16,7 +16,8 @@
 <header class="navbar">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-brand"><img class="brand-icon" src="assets/logo-icon.png" alt="R3 Capital"><span>R3 Capital Wealth Planning</span></a>
-    <nav class="navbar-nav">
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
+    <nav class="navbar-nav" id="primary-nav">
       <a href="index.html" class="active">Início</a><a href="sobre.html" class="">Sobre</a><a href="servicos.html" class="">Serviços</a><a href="equipe.html" class="">Equipe</a><a href="contato.html" class="">Contato</a>
       <a href="contato.html#agendar" class="btn-nav">Agendar conversa</a>
     </nav>
@@ -46,17 +47,17 @@
     </div>
     <div class="grid-3">
       <div class="card">
-        <div style="font-size:2.8rem;font-weight:700;color:var(--teal-700);line-height:1;margin-bottom:.6rem;">70%</div>
+        <div class="stat-big">70%</div>
         <h3>Fortunas dissipadas</h3>
         <p>Das fortunas se dissipam já na 2ª geração, por falta de estrutura e de um plano patrimonial.</p>
       </div>
       <div class="card">
-        <div style="font-size:2.8rem;font-weight:700;color:var(--teal-700);line-height:1;margin-bottom:.6rem;">90%</div>
+        <div class="stat-big">90%</div>
         <h3>Sem planejamento</h3>
         <p>Das famílias não têm planejamento patrimonial formal &mdash; decisões são tomadas sem método e sem visão de longo prazo.</p>
       </div>
       <div class="card">
-        <div style="font-size:2.8rem;font-weight:700;color:var(--teal-700);line-height:1;margin-bottom:.6rem;">R$</div>
+        <div class="stat-big">R$</div>
         <h3>Comissões invisíveis</h3>
         <p>Comissões pagas de forma pouco transparente que, em outro modelo, poderiam ser parte do seu patrimônio.</p>
       </div>
@@ -217,5 +218,8 @@
     </div>
   </div>
 </footer>
+<script>
+(function(){var t=document.querySelector('.nav-toggle'),n=document.getElementById('primary-nav');if(t&&n){t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o);t.setAttribute('aria-label',o?'Fechar menu':'Abrir menu');});}})();
+</script>
 </body>
 </html>

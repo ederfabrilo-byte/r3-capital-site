@@ -16,7 +16,8 @@
 <header class="navbar">
   <div class="navbar-inner">
     <a href="index.html" class="navbar-brand"><img class="brand-icon" src="assets/logo-icon.png" alt="R3 Capital"><span>R3 Capital Wealth Planning</span></a>
-    <nav class="navbar-nav">
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
+    <nav class="navbar-nav" id="primary-nav">
       <a href="index.html" class="">Início</a><a href="sobre.html" class="">Sobre</a><a href="servicos.html" class="">Serviços</a><a href="equipe.html" class="">Equipe</a><a href="contato.html" class="">Contato</a>
       <a href="contato.html#agendar" class="btn-nav">Agendar conversa</a>
     </nav>
@@ -155,5 +156,8 @@
     </div>
   </div>
 </footer>
+<script>
+(function(){var t=document.querySelector('.nav-toggle'),n=document.getElementById('primary-nav');if(t&&n){t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o);t.setAttribute('aria-label',o?'Fechar menu':'Abrir menu');});}})();
+</script>
 </body>
 </html>
