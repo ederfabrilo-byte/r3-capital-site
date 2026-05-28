@@ -62,7 +62,7 @@
       <div id="agendar">
         <h2>Agendar uma conversa</h2>
         <p>Conte um pouco sobre o seu cenário. Retornamos em até 48h úteis com horários disponíveis.</p>
-        <form method="post" action="mailto:contato@r3cap.com.br" enctype="text/plain">
+        <form id="contact-form" method="post" action="mailto:contato@r3cap.com.br" enctype="text/plain">
           <div class="form-row">
             <label for="nome">Nome completo</label>
             <input type="text" id="nome" name="nome" required>
@@ -138,6 +138,7 @@
 </footer>
 <script>
 (function(){var t=document.querySelector('.nav-toggle'),n=document.getElementById('primary-nav');if(t&&n){t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o);t.setAttribute('aria-label',o?'Fechar menu':'Abrir menu');});}})();
+(function(){var f=document.getElementById('contact-form');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var g=function(n){return ((f.elements[n]&&f.elements[n].value)||'').trim();};var mod=f.modalidade?f.modalidade.options[f.modalidade.selectedIndex].text:'';var sub='Contato pelo site — '+(g('nome')||'novo contato');var body='Nome: '+g('nome')+'\nE-mail: '+g('email')+'\nTelefone: '+g('telefone')+'\nModalidade: '+mod+'\n\nMensagem:\n'+g('mensagem');window.location.href='mailto:contato@r3cap.com.br?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(body);});})();
 </script>
 </body>
 </html>
