@@ -451,6 +451,7 @@ form input:focus, form textarea:focus, form select:focus {
 }
 form textarea { min-height: 130px; resize: vertical; }
 form button { width: 100%; }
+.form-status { margin-top: 1rem; font-size: .92rem; font-weight: 600; }
 
 /* ============== FOOTER ============== */
 .footer {

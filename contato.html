@@ -18,7 +18,7 @@
     <a href="index.html" class="navbar-brand"><img class="brand-icon" src="assets/logo-icon.png" alt="R3 Capital"><span>R3 Capital Wealth Planning</span></a>
     <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
     <nav class="navbar-nav" id="primary-nav">
-      <a href="index.html" class="">Início</a><a href="sobre.html" class="">Sobre</a><a href="servicos.html" class="">Serviços</a><a href="equipe.html" class="">Equipe</a><a href="contato.html" class="active">Contato</a>
+      <a href="index.html" class="">Início</a><a href="sobre.html" class="">Sobre</a><a href="equipe.html" class="">Equipe</a><a href="contato.html" class="active">Contato</a>
       <a href="contato.html#agendar" class="btn-nav">Agendar conversa</a>
     </nav>
   </div>
@@ -42,8 +42,8 @@
           <span class="value">contato@r3cap.com.br</span>
         </p>
         <p>
-          <span class="label">Compliance e canal LGPD</span>
-          <span class="value">privacidade@r3cap.com.br</span>
+          <span class="label">Compliance</span>
+          <span class="value">compliance@r3cap.com.br</span>
         </p>
         <p>
           <span class="label">Sede</span>
@@ -62,7 +62,8 @@
       <div id="agendar">
         <h2>Agendar uma conversa</h2>
         <p>Conte um pouco sobre o seu cenário. Retornamos em até 48h úteis com horários disponíveis.</p>
-        <form id="contact-form" method="post" action="mailto:contato@r3cap.com.br" enctype="text/plain">
+        <form id="contact-form" method="POST" action="https://formspree.io/f/SEU_ID_FORMSPREE">
+          <input type="hidden" name="_subject" value="Contato pelo site — R3 Capital">
           <div class="form-row">
             <label for="nome">Nome completo</label>
             <input type="text" id="nome" name="nome" required>
@@ -76,19 +77,11 @@
             <input type="tel" id="telefone" name="telefone">
           </div>
           <div class="form-row">
-            <label for="modalidade">Modalidade de interesse</label>
-            <select id="modalidade" name="modalidade">
-              <option value="pf">Consultoria Pessoa Física</option>
-              <option value="pj">Consultoria Pessoa Jurídica</option>
-              <option value="gf">Consultoria para Grupo Familiar</option>
-              <option value="duvida">Ainda não sei — quero entender</option>
-            </select>
-          </div>
-          <div class="form-row">
             <label for="mensagem">Mensagem</label>
             <textarea id="mensagem" name="mensagem" placeholder="Conte brevemente sobre o seu cenário e o que você está buscando."></textarea>
           </div>
           <button type="submit" class="btn btn-primary">Enviar solicitação</button>
+          <p id="form-status" class="form-status" hidden></p>
         </form>
         <p style="font-size: .85rem; color: var(--gray-500); margin-top: 1rem;">Ao enviar, você concorda com o tratamento dos seus dados conforme a nossa <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
       </div>
@@ -107,7 +100,6 @@
         <h4>Institucional</h4>
         <ul>
           <li><a href="sobre.html">Sobre a R3</a></li>
-          <li><a href="servicos.html">Serviços</a></li>
           <li><a href="equipe.html">Equipe</a></li>
           <li><a href="contato.html">Contato</a></li>
         </ul>
@@ -138,7 +130,7 @@
 </footer>
 <script>
 (function(){var t=document.querySelector('.nav-toggle'),n=document.getElementById('primary-nav');if(t&&n){t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',o);t.setAttribute('aria-label',o?'Fechar menu':'Abrir menu');});}})();
-(function(){var f=document.getElementById('contact-form');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var g=function(n){return ((f.elements[n]&&f.elements[n].value)||'').trim();};var mod=f.modalidade?f.modalidade.options[f.modalidade.selectedIndex].text:'';var sub='Contato pelo site — '+(g('nome')||'novo contato');var body='Nome: '+g('nome')+'\nE-mail: '+g('email')+'\nTelefone: '+g('telefone')+'\nModalidade: '+mod+'\n\nMensagem:\n'+g('mensagem');window.location.href='mailto:contato@r3cap.com.br?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(body);});})();
+(function(){var f=document.getElementById('contact-form');if(!f)return;var st=document.getElementById('form-status');var P='SEU_ID_FORMSPREE';function show(m,ok){if(!st)return;st.textContent=m;st.hidden=false;st.style.color=ok?'var(--teal-700)':'#b00020';}function g(n){return ((f.elements[n]&&f.elements[n].value)||'').trim();}function mailtoFallback(){var sub='Contato pelo site — '+(g('nome')||'novo contato');var body='Nome: '+g('nome')+'\nE-mail: '+g('email')+'\nTelefone: '+g('telefone')+'\n\nMensagem:\n'+g('mensagem');window.location.href='mailto:contato@r3cap.com.br?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(body);}f.addEventListener('submit',function(e){e.preventDefault();if(f.action.indexOf(P)!==-1){mailtoFallback();return;}var data=new FormData(f);fetch(f.action,{method:'POST',body:data,headers:{'Accept':'application/json'}}).then(function(r){if(r.ok){f.reset();show('Mensagem enviada. Retornaremos em breve.',true);}else{show('Não foi possível enviar agora. Escreva para contato@r3cap.com.br.',false);}}).catch(function(){show('Não foi possível enviar agora. Escreva para contato@r3cap.com.br.',false);});});})();
 </script>
 </body>
 </html>
