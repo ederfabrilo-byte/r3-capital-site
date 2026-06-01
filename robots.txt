@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /LEIA-ME.txt
+Disallow: /r3-wordpress-import.xml
+
+Sitemap: https://www.r3cap.com.br/sitemap.xml
