@@ -103,11 +103,22 @@ O Registro.br tem **2 modos mutuamente exclusivos**:
 
 ### Estado atual da configuração DNS
 
-Confirmado em **2026-06-15** (após migração de `dns-parking.com` → Registro.br DNS):
+Confirmado em **2026-06-16** — modo avançado, zona completa:
 
-Estamos no **modo básico** com:
-- **Endereço do site**: `185.199.108.153` (1 dos 4 IPs do GitHub Pages)
-- **Servidor de e-mail**: `mx1.hostinger.com`
+| Tipo | Nome | Dados |
+|------|------|-------|
+| A | r3cap.com.br | 185.199.108.153 |
+| A | r3cap.com.br | 185.199.109.153 |
+| A | r3cap.com.br | 185.199.110.153 |
+| A | r3cap.com.br | 185.199.111.153 |
+| CNAME | www.r3cap.com.br | r3cap.com.br |
+| MX 5 | r3cap.com.br | mx1.hostinger.com |
+| MX 10 | r3cap.com.br | mx2.hostinger.com |
+| TXT | r3cap.com.br | v=spf1 include:_spf.mail.hostinger.com ~all |
+| CNAME | hostingermail-a._domainkey.r3cap.com.br | hostingermail-a.dkim.mail.hostinger.com |
+| CNAME | hostingermail-b._domainkey.r3cap.com.br | hostingermail-b.dkim.mail.hostinger.com |
+| CNAME | hostingermail-c._domainkey.r3cap.com.br | hostingermail-c.dkim.mail.hostinger.com |
+| TXT | _dmarc.r3cap.com.br | v=DMARC1; p=none |
 
 ### Verificação via terminal
 ```bash
@@ -123,7 +134,7 @@ dig +short r3cap.com.br TXT @1.1.1.1
 
 ### URLs
 - **Produção**: https://r3cap.com.br ✅ funcionando com HTTPS (certificado Let's Encrypt automático)
-- **www**: https://www.r3cap.com.br ❌ **NÃO FUNCIONA** (CNAME do www não configurado)
+- **www**: https://www.r3cap.com.br ✅ funcionando (CNAME configurado em 2026-06-16)
 - **URL nativa GitHub**: https://ederfabrilo-byte.github.io/r3-capital-site/ (não usar publicamente)
 
 ### Configuração do custom domain
@@ -141,7 +152,7 @@ Para máxima resiliência (não usado atualmente — usamos só 1 IP), o ideal s
 ```
 E um CNAME para `www` apontando para `ederfabrilo-byte.github.io.`.
 
-Hoje só temos 1 dos 4 IPs porque o modo básico do Registro.br só aceita um.
+Em 2026-06-16 migramos para modo avançado — todos os 4 IPs e www configurados.
 
 ---
 
@@ -152,28 +163,26 @@ Hoje só temos 1 dos 4 IPs porque o modo básico do Registro.br só aceita um.
 - Webmail: https://mail.hostinger.com
 - Painel admin: https://hpanel.hostinger.com → menu **Domains** ou **Emails**
 
-### MX correto para Hostinger nativo
+### MX configurado (2026-06-16)
 ```
-Priority 5  → mx1.hostinger.com
-Priority 10 → mx2.hostinger.com
+Priority 5  → mx1.hostinger.com  ✅
+Priority 10 → mx2.hostinger.com  ✅
 ```
-(Atualmente só temos `mx1` configurado por causa da limitação do modo básico.)
 
-### Caixas/aliases referenciados no site
-| Endereço | Status conhecido | Obrigação |
-|----------|------------------|-----------|
-| `contato@r3cap.com.br` | ✅ existe (135+ mensagens no inbox) | Comercial |
-| `compliance@r3cap.com.br` | ❓ não confirmado | **CVM** — canal obrigatório |
-| `privacidade@r3cap.com.br` | ❓ não confirmado | **LGPD** — canal do DPO (Eder Fabrilo) |
-
-⚠️ **Crítico**: se `compliance@` e `privacidade@` não existirem como caixas ou aliases no Hostinger, há descumprimento regulatório. Verificar urgente no painel.
+### Caixas existentes
+| Endereço | Status | Obrigação |
+|----------|--------|-----------|
+| `contato@r3cap.com.br` | ✅ ativa | Comercial |
+| `compliance@r3cap.com.br` | ✅ criada em 2026-06-16 | **CVM** — canal obrigatório |
+| `privacidade@r3cap.com.br` | ✅ criada em 2026-06-16 | **LGPD** — canal do DPO (Eder Fabrilo) |
 
 ### Forwarding conhecido
 - `contato@r3cap.com.br` → `rafael.r.ratto@gmail.com` (forwarder configurado no Hostinger)
 - E-mail principal de operação: `rafa.ratto86@gmail.com`
 
-### Painel mostra status RED ⚠️
-Em 2026-06-16, o painel Hostinger (`hpanel.hostinger.com` → Domains) mostra `r3cap.com.br` em "External domains" com **badges vermelhos** em "Project" e "Email". Provável causa: como DNS foi movido pra Registro.br, o Hostinger perdeu visibilidade e marca como quebrado. **Mas pode também significar que o plano de e-mail está inativo** — não confirmado ainda.
+### Plano
+- Upgraded de Free Trial para plano pago em 2026-06-16
+- Domínio verificado — painel Hostinger está verde ✅
 
 ---
 
@@ -200,10 +209,14 @@ Em 2026-06-16, o painel Hostinger (`hpanel.hostinger.com` → Domains) mostra `r
 ## 10. ✅ O que está funcionando
 
 - Site no ar em `https://r3cap.com.br` com HTTPS
+- `www.r3cap.com.br` funcionando ✅ (configurado em 2026-06-16)
 - Todas as 9 páginas renderizando corretamente
 - Formulário Formspree (envio OK; destino a verificar)
 - Botões WhatsApp em todas as páginas
-- MX apontando pro Hostinger (e-mails de `contato@` chegam)
+- MX 5 mx1 + MX 10 mx2 configurados ✅
+- SPF + DKIM (3 CNAMEs) + DMARC configurados ✅
+- `compliance@` e `privacidade@` criados no Hostinger ✅
+- Plano Hostinger atualizado (não é mais Free Trial) ✅
 - Deploy automático via GitHub Actions em push para `main`
 - Sitemap e robots.txt configurados
 
@@ -213,28 +226,7 @@ Em 2026-06-16, o painel Hostinger (`hpanel.hostinger.com` → Domains) mostra `r
 
 | # | Item | Risco | Onde resolver |
 |---|------|-------|---------------|
-| 1 | Confirmar caixas `compliance@` e `privacidade@` no Hostinger | **CRÍTICO** (CVM/LGPD) | hPanel Hostinger |
-| 2 | Adicionar **SPF** no DNS (`v=spf1 include:_spf.mail.hostinger.com ~all`) | **Alto** (envios indo pra spam) | Registro.br modo avançado |
-| 3 | Adicionar **DKIM** no DNS (valor exato vem do painel Hostinger) | **Alto** | Hostinger → copiar; Registro.br → colar |
-| 4 | Adicionar **DMARC** (`v=DMARC1; p=none; rua=mailto:contato@r3cap.com.br`) | Médio | Registro.br modo avançado |
-| 5 | Configurar `www.r3cap.com.br` (CNAME para apex) | Médio | Registro.br modo avançado |
-| 6 | Adicionar MX backup `mx2.hostinger.com` priority 10 | Baixo | Registro.br modo avançado |
-| 7 | Adicionar os 4 IPs do GitHub Pages (resiliência) | Baixo | Registro.br modo avançado |
-| 8 | Verificar/ajustar destino do Formspree | Médio (forms podem estar caindo no lugar errado) | Formspree dashboard |
-| 9 | Investigar badges vermelhos Hostinger (`Project` / `Email`) | Médio | hPanel Hostinger |
-
-### Sequência recomendada
-1. Verificar caixas no Hostinger e capturar DKIM
-2. Mudar Registro.br pro modo avançado (lock de 4h já passou)
-3. Adicionar TODOS os registros DNS de uma vez:
-   - 4 A records (`185.199.108.153/109/110/111`) no apex
-   - CNAME `www` → `ederfabrilo-byte.github.io.`
-   - MX 5 `mx1.hostinger.com`
-   - MX 10 `mx2.hostinger.com`
-   - TXT SPF: `v=spf1 include:_spf.mail.hostinger.com ~all`
-   - TXT DKIM (nome `default._domainkey` ou similar, valor do Hostinger)
-   - TXT DMARC (`_dmarc`)
-4. Verificar Formspree
+| 1 | Verificar/ajustar destino do Formspree | Médio (forms podem estar caindo no lugar errado) | Formspree dashboard |
 
 ---
 
